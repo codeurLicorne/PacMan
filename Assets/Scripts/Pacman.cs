@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pacman : MonoBehaviour
 {
     //public AnimatedSprite deathSequence;
+    public GameObject death;
     public SpriteRenderer spriteRenderer { get; private set; }
     public new Collider2D collider { get; private set; }
     public Movement movement { get; private set; }
@@ -42,6 +43,8 @@ public class Pacman : MonoBehaviour
 
     public void ResetState()
     {
+        var deathAnim = GameObject.FindGameObjectWithTag("Death");
+        Destroy(deathAnim);
         enabled = true;
         spriteRenderer.enabled = true;
         collider.enabled = true;
@@ -53,6 +56,7 @@ public class Pacman : MonoBehaviour
 
     public void DeathSequence() 
     {
+        Instantiate(death, transform.position, Quaternion.identity);
         enabled = false;
         spriteRenderer.enabled = false;
         collider.enabled = false;
